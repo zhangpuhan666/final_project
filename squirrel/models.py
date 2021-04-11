@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext as _
 
-class Sightings(models.Model):
+class Sighting(models.Model):
     Latitude = models.FloatField(
         help_text = _('Latitude'),)
 
