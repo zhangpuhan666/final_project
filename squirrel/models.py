@@ -3,10 +3,12 @@ from django.utils.translation import gettext as _
 
 class Sighting(models.Model):
     Latitude = models.FloatField(
-        help_text = _('Latitude'),)
+        help_text = _('Latitude'),
+        )
 
     Longitude  = models.FloatField(
-        help_text = _('Longitude'),)
+        help_text = _('Longitude'),
+        )
 
     Unique_Squirrel_Id = models.CharField(
         max_length=80,
@@ -86,17 +88,17 @@ class Sighting(models.Model):
 
     Running = models.BooleanField(
         help_text=_('Running'),
-        blank=True
+        blank=True,
         )
     
     Chasing = models.BooleanField(
         help_text=_('Chasing'),
-        blank=True
+        blank=True,
         )
 
     Climbing = models.BooleanField(
         help_text=_('Climbing'),
-        blank=True
+        blank=True,
         )
 
     Eating = models.BooleanField(
@@ -112,7 +114,7 @@ class Sighting(models.Model):
     Other_Activities = models.CharField(
         help_text = _('Other Activities'),
         max_length = 80,
-        blank = True
+        blank = True,
         )
 
     Kuks = models.BooleanField(
@@ -154,6 +156,4 @@ class Sighting(models.Model):
         help_text = _('Runs_From'),
         blank=True,
     )
-
-
 
