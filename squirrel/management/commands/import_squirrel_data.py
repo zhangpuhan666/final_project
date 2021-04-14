@@ -6,21 +6,22 @@ import datetime as dt
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument(
-                dest='file_path',
+                'args',
                 help='import_squirrel_data',
                 )
     def handle(self, *args, **options):
-        path = options['file_path']
 
-        f = open(path, 'rb')
-        data = csv.reader(f)
-        next(data)
+        path = args[0]
+
+        with open(path) as f:
+            reader = csv.DictReader(f)
+            data = list(reader)
 
         #change to consistent true or false 
         def bool(string):
-            if string in ['true', 'True','T','True']:
+            if str(string) in ['true', 'True','T','True']:
                 string = "True"
-            elif string in ['FALSE', 'false', 'False','F']:
+            elif str(string) in ['FALSE', 'false', 'False','F']:
                 string = "False"
             else:
                 string = ""
