@@ -10,17 +10,20 @@ class Command(BaseCommand):
                 help='import_squirrel_data',
                 )
     def handle(self, *args, **options):
-        with open(options['file_path']) as fp:
-            reader = csv.DictReader(fp)
-            data = list(reader)
-       #change to consistent true or false 
+        path = options['file_path']
+
+        f = open(path, 'rb')
+        data = csv.reader(f)
+        next(data)
+
+        #change to consistent true or false 
         def bool(string):
             if string in ['true', 'True','T','True']:
-                string = True
+                string = "True"
             elif string in ['FALSE', 'false', 'False','F']:
-                string = False
+                string = "False"
             else:
-                string = None
+                string = ""
             return string
 
         for item in data:
