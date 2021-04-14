@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang='en'>
+	<body>Hi!!</body>
+
+	<body>
+	<ul>
+	{% for sight in sights %}
+	<li>
+		<body>
+			{{sight.Unique_Squirrel_Id}}
+		</body>
+
+
+		<a href="/sightings/{{squirrel.unique_squirrel_id}}" role ="button">update!</a>
+	</li>
+	{% endfor %}
+	</ul>
+	</body>
+
+</html>
