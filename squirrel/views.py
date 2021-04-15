@@ -37,15 +37,15 @@ def stats(request):
     TotalNumber = len(sights)
     AvgLongitude = sights.aggregate(avg_latitude=Avg('Longitude'))
     AvgLatitude = sights.aggregate(avg_latitude=Avg('Latitude'))
-    NumAboveGround = sights.filter(Location ='Above Ground').aggregate(NumAboveGround = Count('Unique_Squirrel_Id'))
-    NumEating = sights.filter(Eating =True).aggregate(NumEating = Count('Unique_Squirrel_Id'))
+    NumAboveGround = sights.filter(Location ='Above Ground').count()
+    NumAdult = sights.filter(Age='Adult').count
 
     context = {
         "TotalNumber": TotalNumber,
         "AvgLongitude": AvgLongitude,
         "AvgLatitude": AvgLatitude,
         "NumAboveGround": NumAboveGround,
-        "NumEating": NumEating,
+        "NumAdult": NumAdult,
     }
     return render(request, 'squirrel/stats.html', context)
 
