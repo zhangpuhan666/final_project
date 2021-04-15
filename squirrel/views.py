@@ -38,7 +38,7 @@ def stats(request):
     AvgLongitude = sights.aggregate(avg_latitude=Avg('Longitude'))
     AvgLatitude = sights.aggregate(avg_latitude=Avg('Latitude'))
     NumAboveGround = sights.filter(Location ='Above Ground').count()
-    NumAdult = sights.filter(Age='Adult').count
+    NumAdult = sights.filter(Age='ADULT').count()
 
     context = {
         "TotalNumber": TotalNumber,
