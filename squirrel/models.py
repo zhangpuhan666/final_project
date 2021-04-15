@@ -36,13 +36,13 @@ class Sighting(models.Model):
         )
 
 
-    ADULT = 'ADULT'
-    JUVENILE = 'JUVENILE'
-    UNKNOWN = 'UNKNOWN'
+    Adult = 'Adult'
+    Juvenile = 'Juvenile'
+    Unknown = '?'
     AGE_CHOICES = [
-        (ADULT, _('ADULT')),
-        (JUVENILE,_('JUVENILE')),
-        (UNKNOWN, _('?'))
+        (Adult, _('Adult')),
+        (Juvenile,_('Juvenile')),
+        (Unknown, _('?'))
         ]
     Age = models.CharField(
         max_length=80,
