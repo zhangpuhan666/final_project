@@ -18,7 +18,7 @@ def sightList(request):
     }
     return render(request, 'squirrel/sightings.html', context)
 
-
+'''
 def unique(request,unique_squirrel_id):
 
     context = {
@@ -26,4 +26,4 @@ def unique(request,unique_squirrel_id):
         'fields': fields
     }
     return render(request, 'sightings/unique.html', context)
-
+'''

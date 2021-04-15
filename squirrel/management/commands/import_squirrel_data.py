@@ -5,10 +5,13 @@ import datetime as dt
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
-        parser.add_argument(
-                'args',
-                help='import_squirrel_data',
-                )
+       # parser.add_argument(
+        #        'file_path',
+         #       help='import_squirrel_data',
+          #      type = str
+           #     )
+        parser.add_argument('args',nargs='+',type=str)
+
     def handle(self, *args, **options):
 
         path = args[0]
@@ -28,7 +31,7 @@ class Command(BaseCommand):
             return string
 
         for item in data:
-            s = Sighting(
+            o = Sighting(
                     Longitude = item['X'],
                     Latitude = item['Y'],
                     Unique_Squirrel_Id = item['Unique Squirrel ID'],
@@ -53,4 +56,6 @@ class Command(BaseCommand):
                     Indifferent = convertBool(item['Indifferent']),
                     Runs_From = convertBool(item['Runs from']),
                     )
-            s.save()
+            o.save()
+
+
