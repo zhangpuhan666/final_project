@@ -3,7 +3,7 @@ from django.shortcuts import render,redirect
 
 from .forms import SightRequestForm
 from .models import Sighting
-
+from django.db.models import Avg, Max, Min, Count
 
 def index(request):
     return render(request,'squirrel/index.html',{})
@@ -36,8 +36,20 @@ def map(request):
 
 def stats(request):
     sights = Sighting.objects.all()
-    context = ""
 
+    TotalNumber = len(sights)
+    AvgLongitude = sights.aggregate(avg_latitude=Avg('Longitude'))
+    AvgLatitude = sights.aggregate(avg_latitude=Avg('Latitude'))
+    NumAboveGround = sights.filter(Location ='Above Ground').aggregate(NumAboveGround = Count('Unique_Squirrel_ID'))
+    NumEating = sights.filter(Eating =True).aggregate(NumEating = Count('Unique_Squirrel_ID'))
+
+    context = {
+        "TotalNumber": TotalNumber,
+        "AvgLongitude": AvgLongitude,
+        "AvgLatitude": AvgLatitude,
+        "NumAboveGround": NumAboveGround,
+        "NumEating": NumEating,
+    }
     return render(request, 'squirrel/stats.html', context)
 
 def add(request):
