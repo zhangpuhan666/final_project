@@ -17,12 +17,20 @@ def sightList(request):
     }
     return render(request, 'squirrel/sightings.html', context)
 
-def update(request,unique_squirrel_id):
-    sights = Sighting.objects.all()
+def update(request,Unique_Squirrel_Id):
+    sights = Sighting.objects.get(Unique_Squirrel_Id=Unique_Squirrel_Id)
+    if request.method == 'POST':
+        form = SightRequestForm(request.POST,instance=sights)
+        if form.is_valid():
+            form.save()
+            return redirect(f'/sightings/')
+    else:
+        form = SightRequestForm(instance=sights)
+
     context = {
-        'sights': sights,
-    }
-    return render(request, 'squirrel/add.html', context)
+            'form': form,
+            }
+    return render(request, 'squirrel/update.html', context)
 
 def map(request):
     sights = Sighting.objects.all()[:100]
@@ -37,8 +45,8 @@ def stats(request):
     TotalNumber = len(sights)
     AvgLongitude = sights.aggregate(avg_latitude=Avg('Longitude'))
     AvgLatitude = sights.aggregate(avg_latitude=Avg('Latitude'))
-    NumAboveGround = sights.filter(Location ='Above Ground').count()
-    NumAdult = sights.filter(Age='ADULT').count()
+    NumAboveGround = list(sights.values_list('Location').annotate(Count('Location')))
+    NumAdult = list(sights.values_list('Age').annotate(Count('Age')))
 
     context = {
         "TotalNumber": TotalNumber,

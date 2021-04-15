@@ -22,7 +22,7 @@ class Command(BaseCommand):
 
         #change to consistent true or false 
         def bool(string):
-            if str(string) in ['true', 'True','T','True']:
+            if str(string) in ['true', 'True','T','TRUE']:
                 string = True
             elif str(string) in ['FALSE', 'false', 'False','F']:
                 string = False
