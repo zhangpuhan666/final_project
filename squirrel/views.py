@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
-
-from .forms import SightRequestForm
+from django.shortcuts import get_object_or_404
+from .forms import SightRequestForm,UpdateForm
 from .models import Sighting
 from django.db.models import Avg, Max, Min, Count
 
@@ -17,15 +17,15 @@ def sightList(request):
     }
     return render(request, 'squirrel/sightings.html', context)
 
-def update(request,Unique_Squirrel_Id):
-    sights = Sighting.objects.get(Unique_Squirrel_Id=Unique_Squirrel_Id)
+def update(request,Id):
+    sight = get_object_or_404(Sighting,Unique_Squirrel_Id=Id)
     if request.method == 'POST':
-        form = SightRequestForm(request.POST,instance=sights)
+        form = UpdateForm(request.POST,instance=sight)
         if form.is_valid():
             form.save()
             return redirect(f'/sightings/')
     else:
-        form = SightRequestForm(instance=sights)
+        form = UpdateForm(instance=sight)
 
     context = {
             'form': form,
