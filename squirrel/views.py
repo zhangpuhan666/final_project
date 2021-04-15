@@ -12,20 +12,17 @@ def index(request):
 
 def sightList(request):
     sights = Sighting.objects.all()
-    fields = ['Unique_Squirrel_Id','Date']
     context = {
         'sights': sights,
-        'fields': fields
     }
     return render(request, 'squirrel/sightings.html', context)
 
 def update(request,unique_squirrel_id):
-
+    sights = Sighting.objects.all()
     context = {
         'sights': sights,
-        'fields': fields
     }
-    return render(request, 'squirrel/unique.html', context)
+    return render(request, 'squirrel/add.html', context)
 
 def map(request):
     sights = Sighting.objects.all()[:100]
@@ -40,8 +37,8 @@ def stats(request):
     TotalNumber = len(sights)
     AvgLongitude = sights.aggregate(avg_latitude=Avg('Longitude'))
     AvgLatitude = sights.aggregate(avg_latitude=Avg('Latitude'))
-    NumAboveGround = sights.filter(Location ='Above Ground').aggregate(NumAboveGround = Count('Unique_Squirrel_ID'))
-    NumEating = sights.filter(Eating =True).aggregate(NumEating = Count('Unique_Squirrel_ID'))
+    NumAboveGround = sights.filter(Location ='Above Ground').aggregate(NumAboveGround = Count('Unique_Squirrel_Id'))
+    NumEating = sights.filter(Eating =True).aggregate(NumEating = Count('Unique_Squirrel_Id'))
 
     context = {
         "TotalNumber": TotalNumber,
