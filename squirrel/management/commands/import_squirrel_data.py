@@ -23,11 +23,11 @@ class Command(BaseCommand):
         #change to consistent true or false 
         def bool(string):
             if str(string) in ['true', 'True','T','True']:
-                string = "True"
+                string = True
             elif str(string) in ['FALSE', 'false', 'False','F']:
-                string = "False"
+                string = False
             else:
-                string = ""
+                string = None
             return string
 
         for item in data:

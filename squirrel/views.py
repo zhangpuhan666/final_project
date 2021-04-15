@@ -1,6 +1,7 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
+from .forms import SightRequestForm
 from .models import Sighting
 
 
@@ -18,12 +19,38 @@ def sightList(request):
     }
     return render(request, 'squirrel/sightings.html', context)
 
-'''
-def unique(request,unique_squirrel_id):
+def update(request,unique_squirrel_id):
 
     context = {
         'sights': sights,
         'fields': fields
     }
-    return render(request, 'sightings/unique.html', context)
-'''
+    return render(request, 'squirrel/unique.html', context)
+
+def map(request):
+    sights = Sighting.objects.all()[:100]
+    context = {
+            'sights':sights,
+            }
+    return render(request, 'squirrel/map.html', context)
+
+def stats(request):
+    sights = Sighting.objects.all()
+    context = ""
+
+    return render(request, 'squirrel/stats.html', context)
+
+def add(request):
+    if request.method == 'POST':
+        form = SightRequestForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(f'/sightings/')
+    else:
+        form = SightRequestForm()
+
+    context = {
+            'form':form,
+            }
+
+    return render(request, 'squirrel/add.html', context)

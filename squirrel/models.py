@@ -12,8 +12,10 @@ class Sighting(models.Model):
 
     Unique_Squirrel_Id = models.CharField(
         max_length=80,
-        help_text=_('The unique squirrel ID'),)
-
+        help_text=_('The unique squirrel ID'),
+        unique=True,
+        primary_key=True,
+        )
     AM = 'AM'
     PM = 'PM'
     SHIFT_CHOICES = [
@@ -89,26 +91,31 @@ class Sighting(models.Model):
     Running = models.BooleanField(
         help_text=_('Running'),
         blank=True,
+        null=True
         )
     
     Chasing = models.BooleanField(
         help_text=_('Chasing'),
         blank=True,
+        null=True
         )
 
     Climbing = models.BooleanField(
         help_text=_('Climbing'),
         blank=True,
+        null=True
         )
 
     Eating = models.BooleanField(
         help_text = _('Eating'),
         blank=True,
+        null=True
         )
 
     Foraging = models.BooleanField(
         help_text = _('Foraging'),
         blank=True,
+        null=True,
         )
 
     Other_Activities = models.CharField(
@@ -120,40 +127,48 @@ class Sighting(models.Model):
     Kuks = models.BooleanField(
         help_text = _('Kuks'),
         blank=True,
+        null=True
         )
 
     Quaas = models.BooleanField(
         help_text = _('Quaas'),
         blank=True,
+        null=True
     )
 
     Moans = models.BooleanField(
         help_text = _('Moans'),
         blank=True,
+        null=True
     )
 
     Tail_Flags = models.BooleanField(
         help_text = _('Tail_Flags'),
         blank=True,
+        null=True
     )
 
     Tail_Twitches = models.BooleanField(
         help_text = _('Tail_Twitches'),
         blank=True,
+        null=True
     )
 
     Approaches = models.BooleanField(
         help_text = _('Approaches'),
         blank=True,
+        null=True
     )
 
     Indifferent = models.BooleanField(
         help_text = _('Indifferent'),
         blank=True,
+        null=True
     )
 
     Runs_From = models.BooleanField(
         help_text = _('Runs_From'),
         blank=True,
+        null=True
     )
 

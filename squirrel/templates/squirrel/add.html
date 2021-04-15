@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+        <head>
+                <title>Group 6: Adding a new squirrel Sight</title>
+	</head>
+
+	<body>
+		<form method='post'>
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <br>
+                        <input type="submit" name="add">
+			<br>
+		</form>
+	</body>
+</html>
